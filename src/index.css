@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 20% 16%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 16%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 16%;
+    --primary: 153 50% 28%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 30% 96%;
+    --secondary-foreground: 220 20% 16%;
+    --muted: 220 10% 95%;
+    --muted-foreground: 220 8% 46%;
+    --accent: 153 55% 34%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 10% 91%;
+    --input: 220 10% 91%;
+    --ring: 153 50% 28%;
+    --radius: 0.5rem;
+
+    --gold: 38 80% 55%;
+    --gold-light: 40 75% 65%;
+    --gold-dark: 35 85% 42%;
+    --navy: 220 35% 15%;
+    --navy-light: 220 25% 25%;
+    --navy-dark: 220 40% 10%;
+    --cream: 40 30% 97%;
+    --maroon: 0 70% 28%;
+    --maroon-light: 0 55% 38%;
+
+    --sidebar-background: 220 35% 12%;
+    --sidebar-foreground: 40 20% 97%;
+    --sidebar-primary: 153 55% 38%;
+    --sidebar-primary-foreground: 220 35% 10%;
+    --sidebar-accent: 220 25% 20%;
+    --sidebar-accent-foreground: 40 20% 97%;
+    --sidebar-border: 220 20% 22%;
+    --sidebar-ring: 153 55% 38%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(153 50% 28% / 0.3); }
+  50% { box-shadow: 0 0 20px 4px hsl(153 50% 28% / 0.15); }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee-fast {
+  animation: marquee 8s linear infinite;
+}
+.animate-marquee-fast:hover {
+  animation-play-state: paused;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.25s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-count-up {
+  animation: countUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Premium card hover */
+.premium-card {
+  @apply transition-all duration-300;
+}
+.premium-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
+}
+
+/* Section divider */
+.section-divider {
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--gold)));
+  border-radius: 2px;
+}
+
+/* Glass effect */
+.glass {
+  background: hsl(0 0% 100% / 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsl(0 0% 100% / 0.12);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Notice vertical scroll animation */
+.notice-scroll-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.notice-scroll {
+  animation: noticeScroll 20s linear infinite;
+}
+.notice-scroll:hover {
+  animation-play-state: paused;
+}
+@keyframes noticeScroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}

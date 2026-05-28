@@ -6,6 +6,10 @@ on:
     branches:
       - main  # Jab bhi aap main branch par 'git push' karoge
 
+# GitHub Actions ko repo me vaapas push (Write) karne ki permission dene ke liye
+permissions:
+  contents: write
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest  # GitHub hame ek free Ubuntu machine dega ye kaam karne ke liye
@@ -23,11 +27,26 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     # Step 3: Dockerfile ko padh kar image build karega aur direct Docker Hub par push kar dega
+    # Is baar hum 'latest' aur unique 'Commit SHA' dono tags push karenge
     - name: Build and Push Docker Image
       uses: docker/build-push-action@v5
       with:
         context: .
         file: ./Dockerfile
         push: true
-        # Isse aapki image 'username/vision-campus-life:latest' naam se save hogi
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/vision-campus-life:latest
+        tags: |
+          ${{ secrets.DOCKERHUB_USERNAME }}/vision-campus-life:latest
+          ${{ secrets.DOCKERHUB_USERNAME }}/vision-campus-life:${{ github.sha }}
+
+    # Step 4: [NEW] Helm Chart ke values.yaml me naye tag ko auto-update karna aur push karna
+    - name: Update Helm Chart Image Tag
+      run: |
+        # values.yaml me 'tag:' ke aage naya commit SHA automatic daal dega
+        sed -i 's/tag:.*/tag: "${{ github.sha }}"/' vision-chart/values.yaml
+        
+        # Is change ko vapas GitHub repository me push karna
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add vision-chart/values.yaml
+        git commit -m "chore: update image tag to ${{ github.sha }} [skip ci]"
+        git push

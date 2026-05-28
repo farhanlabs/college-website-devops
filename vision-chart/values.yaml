@@ -1,6 +1,6 @@
 # vision-chart/values.yaml
 
-replicaCount: 3
+replicaCount: 1
 
 image:
   repository: farhan091/vision-campus-life

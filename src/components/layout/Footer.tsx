@@ -8,7 +8,7 @@ const Footer = () => (
     <div className="bg-primary py-8">
       <div className="container flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="text-white">
-          <h3 className="font-heading text-xl md:text-2xl">Ready to Begin Your Journey??? Hurry UP</h3>
+          <h3 className="font-heading text-xl md:text-2xl">Ready to Begin Your Journey??? Hurry UP & Get Admissions</h3>
           <p className="text-white/60 text-sm mt-1">Admissions open for the academic year 2025-26.</p>
         </div>
         <a href="https://mecw-admission.vercel.app/#admission" target="_blank" rel="noreferrer" className="px-6 py-2.5 bg-gold text-white rounded font-bold text-sm hover:brightness-110 transition-all shadow-lg inline-flex items-center gap-2">

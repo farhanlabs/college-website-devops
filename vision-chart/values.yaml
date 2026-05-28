@@ -4,7 +4,7 @@ replicaCount: 3
 
 image:
   repository: farhan091/vision-campus-life
-  tag: latest
+  tag: "cc312318a760ba03541339d69bd3d97ac0e71871"
   pullPolicy: Always
 
 ingress:

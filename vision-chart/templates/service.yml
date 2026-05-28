@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vision-campus-service
+spec:
+  selector:
+    app: vision-campus-app # Yeh exact match hona chahiye deployment wale label se
+  ports:
+  - port: 80        # Service ka port
+    targetPort: 80  # Pod/Container ka port
+  type: NodePort

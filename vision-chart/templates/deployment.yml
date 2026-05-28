@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vision-campus-deployment
+spec:
+  replicas: {{ .Values.replicaCount }} # Humesha 2 pods running rahenge production high-availability ke liye
+  selector:
+    matchLabels:
+      app: vision-campus-app
+  template:
+    metadata:
+      labels:
+        app: vision-campus-app
+    spec:
+      containers:
+      - name: react-web-app
+        # K8s is image ko seedhe aapke Docker Hub se pull karega
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: 80 # Nginx port 80 pe chal raha hai container ke andar
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10

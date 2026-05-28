@@ -1,0 +1,11 @@
+# vision-chart/values.yaml
+
+replicaCount: 2
+
+image:
+  repository: farhan091/vision-campus-life
+  tag: latest
+  pullPolicy: Always
+
+ingress:
+  host: vision.local
